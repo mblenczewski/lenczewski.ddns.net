@@ -6,7 +6,7 @@ python scripts/build_html.py
 robocopy public out /S /is /it /NJH /NJS
 
 :: Minify HTML
-set html-minifier-vars=--collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --minify-css true --minify-js true
+set html-minifier-vars=--collapse-whitespace --minify-css true --minify-js true --process-scripts "application/javascript" --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-tag-whitespace
 forfiles /p out /s /m *.html /c "cmd /c html-minifier %html-minifier-vars% @file -o @file"
 
 :: Export CSS

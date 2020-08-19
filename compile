@@ -6,7 +6,7 @@ scripts/build_html.py
 cp -r public/* out/
 
 ## Minify HTML
-html-minifier-vars=--collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true
+html-minifier-vars=--collapse-whitespace --minify-css true --minify-js true --process-scripts "application/javascript" --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-tag-whitespace
 for html in out/*.html; do
     html-minifier $html-minifier-vars -o out\$html out\$html
 done
