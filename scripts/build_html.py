@@ -191,7 +191,7 @@ if __name__ == '__main__':
     write_html_file(HTML_LAYOUT_BASE, {'TITLE': 'Posts'}, HTML(
         'posts.html'), TMP('posts.html'))
 
-    mapped_posts = []
+    mapped_posts = {}  # Stores mapped posts and the date of their posting
     for post in [f for f in os.listdir(ROOT + '/posts/') if os.path.isfile(ROOT + '/posts/' + f)]:
         post = ROOT + '/posts/' + post
         (header, _) = parse_post(post)
@@ -200,9 +200,12 @@ if __name__ == '__main__':
         write_md_file(HTML('_PostLayout.html'), post_layout_binder,
                       post, TMP(f'posts/{mapped_post_name}'))
 
-        mapped_posts.append(TMP(f'posts/{mapped_post_name}'))
+        mapped_posts[TMP(f'posts/{mapped_post_name}')] = header.date
 
         write_html_file(HTML('_Layout.html'), {'TITLE': header.title}, TMP(
             f'posts/{mapped_post_name}'), OUT(f'posts/{mapped_post_name}'))
 
-    write_html_files(TMP('posts.html'), mapped_posts, OUT('posts.html'))
+    posts = list(mapped_posts.keys())
+    posts.sort(key=lambda path: mapped_posts[path], reverse=True)
+
+    write_html_files(TMP('posts.html'), posts, OUT('posts.html'))
