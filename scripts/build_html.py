@@ -29,7 +29,20 @@ class MarkdownHeader:
 NULL_MARKDOWN_HEADER = MarkdownHeader('', '')
 
 POST_RENDERER = HtmlRenderer()
-POST_PARSER = Markdown(POST_RENDERER)
+# https://misaka.readthedocs.io/en/latest/#extensions or https://docs.rs/hoedown/6.0.0/hoedown/
+POST_PARSER_EXTENSIONS = [
+    'autolink',
+    'fenced-code',
+    'footnotes',
+    'highlight',
+    'no-intra-emphasis',
+    'quote',
+    'space-headers',
+    'strikethrough',
+    'superscript',
+    'tables'
+]
+POST_PARSER = Markdown(POST_RENDERER, POST_PARSER_EXTENSIONS)
 PLACEHOLDERS = {
     'TITLE': '{{TITLE_PLACEHOLDER}}',
     'CONTENT': '{{CONTENT_PLACEHOLDER}}',
@@ -61,7 +74,7 @@ def post_layout_binder(layout_contents: str, header: MarkdownHeader, contents: s
         PLACEHOLDERS['POST_STATIC_LINK'], f'/posts/{get_post_id(header.title)}.html')
 
     layout_contents = layout_contents.replace(
-        PLACEHOLDERS['POST_CONTENT'], contents)
+        PLACEHOLDERS['POST_CONTENT'], POST_PARSER(contents))
 
     layout_contents = layout_contents.replace(
         PLACEHOLDERS['POST_DATE'], header.date)
@@ -160,17 +173,23 @@ def write_html_files(layout_file, src_files, dest_file):
 
 
 if __name__ == '__main__':
+    if not os.path.isdir(OUT('')):
+        os.mkdir(OUT(''))
+
+    if not os.path.isdir(OUT('posts/')):
+        os.mkdir(OUT('posts/'))
+
+    if not os.path.isdir(TMP('')):
+        os.mkdir(TMP(''))
+
+    if not os.path.isdir(TMP('posts/')):
+        os.mkdir(TMP('posts/'))
+
     write_html_file(HTML_LAYOUT_BASE, {'TITLE': 'Index'}, HTML(
         'index.html'), OUT('index.html'))
 
     write_html_file(HTML_LAYOUT_BASE, {'TITLE': 'Posts'}, HTML(
         'posts.html'), TMP('posts.html'))
-
-    if not os.path.isdir(TMP('posts/')):
-        os.mkdir(TMP('posts/'))
-
-    if not os.path.isdir(OUT('posts/')):
-        os.mkdir(OUT('posts/'))
 
     mapped_posts = []
     for post in [f for f in os.listdir(ROOT + '/posts/') if os.path.isfile(ROOT + '/posts/' + f)]:

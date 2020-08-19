@@ -1,12 +1,12 @@
 #!/bin/bash
 
-cp -r public/* out/
-
 scripts/build_html.py
 
-html-minifier-vars=--collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true
+## Export from 'public' directory
+cp -r public/* out/
 
 ## Minify HTML
+html-minifier-vars=--collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true
 for html in out/*.html; do
     html-minifier $html-minifier-vars -o out\$html out\$html
 done

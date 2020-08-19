@@ -6,9 +6,9 @@
 
 html,
 body {
+	height: 100%;
 	margin: 0 !important;
 	padding: 0 !important;
-	height: 100%;
 }
 
 h1,
@@ -17,8 +17,8 @@ h3,
 h4,
 h5,
 h6 {
-	text-align: center;
 	line-height: 1.2;
+	text-align: center;
 }
 
 hr {
@@ -103,11 +103,12 @@ h6 {
 }
 
 .theme-toggle {
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
 	clip: rect(1px, 1px, 1px, 1px);
+	display: none;
+	height: 1px;
+	overflow: hidden;
+	position: absolute !important;
+	width: 1px;
 }
 
 .theme-toggle-label {
