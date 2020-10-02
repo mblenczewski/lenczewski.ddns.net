@@ -1,17 +1,50 @@
 #!/bin/bash
 
+## setup python environment
+[ -d "env/" ] || python -m venv env
+source env/bin/activate
+
+pip install -r requirements.txt --no-cache-dir
+
+## setup node environment
+[ -d "node_modules/" ] || npm install
+
+## setup folder structure
+[ -d "tmp/" ] && rm -rf tmp/* || mkdir tmp/
+mkdir tmp/{js,posts,public,styles}
+
+[ -d "out/" ] && rm -rf out/* || mkdir out/
+mkdir out/{js,posts,public,styles}
+
+## build html
 scripts/build_html.py
+
+## deactivate python environment
+deactivate
 
 ## Export from 'public' directory
 cp -r public/* out/
 
-## Minify HTML
-html-minifier-vars=--collapse-whitespace --minify-css true --minify-js true --process-scripts "application/javascript" --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-tag-whitespace
+## minify html
+HTML_MINIFIER_VARS="\
+	--collapse-whitespace \
+	--minify-css true \
+	--remove-comments \
+	--remove-optional-tags \
+	--remove-redundant-attributes \
+	--remove-tag-whitespace"
+
 for html in out/*.html; do
-    html-minifier $html-minifier-vars -o out\$html out\$html
+    html-minifier $html ${HTML_MINIFIER_VARS} -o $html
 done
 
-## Export CSS
+## export css
 for css in styles/*.css; do
-    csso styles/$css -o out/styles/$css
+	csso $css -o out/$css
 done
+
+## export javascript
+for js in js/*.js; do
+	uglifyjs $js --compress -o out/$js
+done
+

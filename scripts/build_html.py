@@ -1,9 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from misaka import HtmlRenderer, Markdown
 from pprint import pprint
 
 import os
+
 
 ROOT = os.path.abspath('./')
 
@@ -173,18 +174,6 @@ def write_html_files(layout_file, src_files, dest_file):
 
 
 if __name__ == '__main__':
-    if not os.path.isdir(OUT('')):
-        os.mkdir(OUT(''))
-
-    if not os.path.isdir(OUT('posts/')):
-        os.mkdir(OUT('posts/'))
-
-    if not os.path.isdir(TMP('')):
-        os.mkdir(TMP(''))
-
-    if not os.path.isdir(TMP('posts/')):
-        os.mkdir(TMP('posts/'))
-
     write_html_file(HTML_LAYOUT_BASE, {'TITLE': 'Index'}, HTML(
         'index.html'), OUT('index.html'))
 

@@ -1,4 +1,14 @@
 .vscode/
-out/
-posts/*
+
+# Data directory where blog posts are held
+posts/**
+!posts/
+
+# Artefact directories
 tmp/
+out/
+
+# Toolchain directories
+env/
+node_modules/
+

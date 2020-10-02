@@ -33,43 +33,7 @@
 		<link rel="stylesheet" href="/styles/style.css" />
 		<link rel="stylesheet" href="/styles/sunburst.css" />
 		<script src="/lib/highlight.pack.js"></script>
-		<script type="application/javascript">
-			function onThemeToggled(e) {
-				if (typeof Storage !== 'undefined') {
-					if (e.currentTarget.checked === true) {
-						localStorage.setItem(
-							'switchedThemeFromDefault',
-							'true'
-						);
-					} else {
-						localStorage.removeItem('switchedThemeFromDefault');
-					}
-				} else {
-					console.log(
-						'No storage supported; theme selection preferences will not be saved across sessions!'
-					);
-				}
-			}
-
-			document.addEventListener('DOMContentLoaded', (event) => {
-				if (typeof Storage !== 'undefined') {
-					const themeToggler = document.querySelector(
-						'#theme-toggler'
-					);
-					themeToggler.checked =
-						localStorage.getItem('switchedThemeFromDefault') ===
-						'true';
-				} else {
-					console.log(
-						'No storage supported; theme selection preferences will not be saved across sessions!'
-					);
-				}
-
-				document.querySelectorAll('pre code').forEach((block) => {
-					hljs.highlightBlock(block);
-				});
-			});
-		</script>
+		<script src="/js/main.js"></script>
 	</head>
 	<body>
 		<input
