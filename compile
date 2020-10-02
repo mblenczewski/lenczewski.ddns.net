@@ -11,10 +11,10 @@ pip install -r requirements.txt --no-cache-dir
 
 ## setup folder structure
 [ -d "tmp/" ] && rm -rf tmp/* || mkdir tmp/
-mkdir tmp/{js,posts,public,styles}
+mkdir tmp/{js,posts,styles}
 
 [ -d "out/" ] && rm -rf out/* || mkdir out/
-mkdir out/{js,posts,public,styles}
+mkdir out/{js,posts,styles}
 
 ## build html
 scripts/build_html.py

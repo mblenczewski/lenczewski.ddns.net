@@ -2,7 +2,6 @@
 
 # Data directory where blog posts are held
 posts/**
-!posts/
 
 # Artefact directories
 tmp/
