@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from misaka import HtmlRenderer, Markdown
+from datetime import datetime
 from pprint import pprint
 
 import os
@@ -22,12 +23,14 @@ POST_METADATA_SEPARATOR = '---'
 
 
 class MarkdownHeader:
-    def __init__(self, title: str, date: str):
+    def __init__(self, title: str, **kwargs):
         self.title = title
-        self.date = date
+        now = datetime.now()
+        self.date = kwargs.get('date', f'{now.day}-{now.month}-{now.year}')
+        self.edit_date = kwargs.get('edit_date', self.date)
 
 
-NULL_MARKDOWN_HEADER = MarkdownHeader('', '')
+NULL_MARKDOWN_HEADER = MarkdownHeader('')
 
 POST_RENDERER = HtmlRenderer()
 # https://misaka.readthedocs.io/en/latest/#extensions or https://docs.rs/hoedown/6.0.0/hoedown/
@@ -54,6 +57,7 @@ PLACEHOLDERS = {
     'POST_STATIC_LINK': '{{POST_STATIC_LINK_PLACEHOLDER}}',
     'POST_CONTENT': '{{POST_CONTENT_PLACEHOLDER}}',
     'POST_DATE': '{{POST_DATE_PLACEHOLDER}}',
+    'POST_EDIT_DATE': '{{POST_EDIT_DATE_PLACEHOLDER}}',
 }
 
 
@@ -80,6 +84,9 @@ def post_layout_binder(layout_contents: str, header: MarkdownHeader, contents: s
     layout_contents = layout_contents.replace(
         PLACEHOLDERS['POST_DATE'], header.date)
 
+    layout_contents = layout_contents.replace(
+        PLACEHOLDERS['POST_EDIT_DATE'], header.edit_date)
+
     return layout_contents
 
 
@@ -89,28 +96,25 @@ def parse_post(path) -> (MarkdownHeader, str):
             return line[:len(separator)] == separator
 
         if not hit_metadata_separator(file.readline(), header_separator):
-            print(
-                f'Post at {path} lacks metadata separator ({header_separator}) on first line; skipping file!')
+            print(f'Metadata for post at {path} lacks beginning separator ({header_separator})! Skipping file')
             return NULL_MARKDOWN_HEADER
 
         header = {}
+        try:
+            while True:
+                line = file.readline()
 
-        while True:
-            line = file.readline()
+                if hit_metadata_separator(line, header_separator):
+                    break
+                else:
+                    (arg, value) = line.split(':')
+                    header[arg] = value
 
-            if hit_metadata_separator(line, header_separator):
-                break
-            else:
-                (arg, value) = line.split(':')
-                header[arg] = value
+            return MarkdownHeader(**header)
 
-        if 'title' not in header or 'date' not in header:
-            print(
-                f'Could not find both \'title\' and \'date\' field in metadata for post at {path}. Check spelling?')
-
+        except (TypeError, KeyError) as err:
+            print(f'Metadata for post at {path} lacks certain fields! Check spelling?')
             return NULL_MARKDOWN_HEADER
-
-        return MarkdownHeader(header['title'], header['date'])
 
     with open(path) as file:
         header = parse_header(file, POST_METADATA_SEPARATOR)
@@ -184,6 +188,10 @@ if __name__ == '__main__':
     for post in [f for f in os.listdir(ROOT + '/posts/') if os.path.isfile(ROOT + '/posts/' + f)]:
         post = ROOT + '/posts/' + post
         (header, _) = parse_post(post)
+
+        if header == NULL_MARKDOWN_HEADER:
+            continue  ## ignore posts with corrupted headers
+        
         mapped_post_name = get_post_id(header.title) + '.html'
 
         write_md_file(HTML('_PostLayout.html'), post_layout_binder,
