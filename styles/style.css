@@ -1,9 +1,4 @@
 /* ========== HTML Element Themes ==========*/
-
-* {
-	transition: color 0.2s, background-color 0.2s;
-}
-
 html,
 body {
 	height: 100%;
@@ -134,8 +129,9 @@ h6 {
 #themed {
 	background: var(--theme-bg);
 	color: var(--theme-text);
-	font: normal 1em/1.62 sans-serif, 'Times New Roman', Times, serif;
+	font: normal 1em/1.62 monospace, 'Lucida Console', Monaco, monospace;
 	min-height: 100%;
+	transition: color 0.2s, background-color 0.2s;
 }
 
 /* ========== Display Utils ========== */
