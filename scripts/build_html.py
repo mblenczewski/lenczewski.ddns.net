@@ -23,14 +23,15 @@ POST_METADATA_SEPARATOR = '---'
 
 
 class MarkdownHeader:
-    def __init__(self, title: str, **kwargs):
+    def __init__(self, slug: str, title: str, **kwargs):
+        self.slug = slug
         self.title = title
         now = datetime.now()
         self.date = kwargs.get('date', f'{now.day}-{now.month}-{now.year}')
-        self.edit_date = kwargs.get('edit_date', self.date)
+        self.edit = kwargs.get('edit', self.date)
 
 
-NULL_MARKDOWN_HEADER = MarkdownHeader('')
+NULL_MARKDOWN_HEADER = MarkdownHeader('', '')
 
 POST_RENDERER = HtmlRenderer()
 # https://misaka.readthedocs.io/en/latest/#extensions or https://docs.rs/hoedown/6.0.0/hoedown/
@@ -61,22 +62,22 @@ PLACEHOLDERS = {
 }
 
 
-def get_post_id(title: str):
-    return title.lower().strip().replace(' ', '-')
+def get_post_id(post_header: MarkdownHeader):
+    return post_header.slug.lower().strip().replace(' ', '-')
 
 
 def post_layout_binder(layout_contents: str, header: MarkdownHeader, contents: str):
     layout_contents = layout_contents.replace(
-        PLACEHOLDERS['POST_ID'], get_post_id(header.title))
+        PLACEHOLDERS['POST_ID'], get_post_id(header))
 
     layout_contents = layout_contents.replace(
         PLACEHOLDERS['POST_TITLE'], header.title)
 
     layout_contents = layout_contents.replace(
-        PLACEHOLDERS['POST_DYNAMIC_LINK'], f'/posts.html#{get_post_id(header.title)}')
+        PLACEHOLDERS['POST_DYNAMIC_LINK'], f'/posts.html#{get_post_id(header)}')
 
     layout_contents = layout_contents.replace(
-        PLACEHOLDERS['POST_STATIC_LINK'], f'/posts/{get_post_id(header.title)}.html')
+        PLACEHOLDERS['POST_STATIC_LINK'], f'/posts/{get_post_id(header)}.html')
 
     layout_contents = layout_contents.replace(
         PLACEHOLDERS['POST_CONTENT'], POST_PARSER(contents))
@@ -85,7 +86,7 @@ def post_layout_binder(layout_contents: str, header: MarkdownHeader, contents: s
         PLACEHOLDERS['POST_DATE'], header.date)
 
     layout_contents = layout_contents.replace(
-        PLACEHOLDERS['POST_EDIT_DATE'], header.edit_date)
+        PLACEHOLDERS['POST_EDIT_DATE'], header.edit)
 
     return layout_contents
 
@@ -100,6 +101,7 @@ def parse_post(path) -> (MarkdownHeader, str):
             return NULL_MARKDOWN_HEADER
 
         header = {}
+        header['slug'] = path[path.rfind('/')+1:path.rfind('.')]
         try:
             while True:
                 line = file.readline()
@@ -113,7 +115,7 @@ def parse_post(path) -> (MarkdownHeader, str):
             return MarkdownHeader(**header)
 
         except (TypeError, KeyError) as err:
-            print(f'Metadata for post at {path} lacks certain fields! Check spelling?')
+            print(f'Metadata for post at {path} lacks certain fields! Check spelling? Skipping file')
             return NULL_MARKDOWN_HEADER
 
     with open(path) as file:
@@ -192,7 +194,7 @@ if __name__ == '__main__':
         if header == NULL_MARKDOWN_HEADER:
             continue  ## ignore posts with corrupted headers
         
-        mapped_post_name = get_post_id(header.title) + '.html'
+        mapped_post_name = get_post_id(header) + '.html'
 
         write_md_file(HTML('_PostLayout.html'), post_layout_binder,
                       post, TMP(f'posts/{mapped_post_name}'))
@@ -206,3 +208,4 @@ if __name__ == '__main__':
     posts.sort(key=lambda path: mapped_posts[path], reverse=True)
 
     write_html_files(TMP('posts.html'), posts, OUT('posts.html'))
+
