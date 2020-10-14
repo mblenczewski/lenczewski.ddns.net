@@ -11,10 +11,10 @@ pip install -r requirements.txt --no-cache-dir
 
 ## setup folder structure
 [ -d "tmp/" ] && rm -rf tmp/* || mkdir tmp/
-mkdir tmp/{js,posts,styles}
+mkdir tmp/{js,posts,css}
 
 [ -d "out/" ] && rm -rf out/* || mkdir out/
-mkdir out/{js,posts,styles}
+mkdir out/{js,posts,css}
 
 ## build html
 scripts/build_html.py
@@ -39,7 +39,7 @@ for html in out/*.html; do
 done
 
 ## export css
-for css in styles/*.css; do
+for css in css/*.css; do
 	csso $css -o out/$css
 done
 

@@ -11,7 +11,7 @@ ROOT = os.path.abspath('./')
 
 
 def HTML(path): return os.path.abspath(ROOT + f'/html/{path}')
-def CSS(path): return os.path.abspath(ROOT + f'/styles/{path}')
+def CSS(path): return os.path.abspath(ROOT + f'/css/{path}')
 def MD(path): return os.path.abspath(ROOT + f'/posts/{path}')
 def TMP(path): return os.path.abspath(ROOT + f'/tmp/{path}')
 def OUT(path): return os.path.abspath(ROOT + f'/out/{path}')
