@@ -1,7 +1,6 @@
-.vscode/
-
 # Data directory where blog posts are held
 posts/**
+drafts/**
 
 # Artefact directories
 tmp/
@@ -9,5 +8,4 @@ out/
 
 # Toolchain directories
 env/
-node_modules/
-
+__pycache__/
