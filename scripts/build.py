@@ -62,8 +62,8 @@ def convert_md(layout_fpath, src_fpath, dst_fpath):
         replace(PLACEHOLDERS['POST_DYNAMIC_LINK'], dynamic_link).\
         replace(PLACEHOLDERS['POST_STATIC_LINK'], static_link).\
         replace(PLACEHOLDERS['POST_CONTENT'], POST_PARSER(contents)).\
-        replace(PLACEHOLDERS['POST_DATE'], header.date).\
-        replace(PLACEHOLDERS['POST_EDIT_DATE'], header.edit)
+        replace(PLACEHOLDERS['POST_DATE'], str(header.date)).\
+        replace(PLACEHOLDERS['POST_EDIT_DATE'], str(header.edit))
 
     WRITE(dst_fpath, out)
 

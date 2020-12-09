@@ -1,5 +1,12 @@
-from datetime import datetime
+from datetime import date, datetime
 from os.path import abspath
+
+
+def unpack_date(packed):
+    segments = [int(seg.strip()) for seg in packed.split('-')]
+    unpacked = date(segments[0], segments[1], segments[2])
+    return unpacked
+
 
 class MarkdownHeader:
     SEPARATOR='---'
@@ -8,8 +15,10 @@ class MarkdownHeader:
         self.slug = slug
         self.title = title
         now = datetime.now()
-        self.date = kwargs.get('date', f'{now.day}-{now.month}-{now.year}')
-        self.edit = kwargs.get('edit', self.date)
+        date = kwargs.get('date', f'{now.year}-{now.month}-{now.day}')
+        self.date = unpack_date(date)
+        edit = kwargs.get('edit', date)
+        self.edit = unpack_date(edit)
 
 
 NULL_MARKDOWN_HEADER = MarkdownHeader('', '')
