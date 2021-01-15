@@ -1,0 +1,49 @@
+#!/bin/sh
+
+help () {
+	echo "Usage: $(basename -- "$0") -h"
+	echo "-h :"
+	echo "	Displays usage information"
+	echo "-n <post-file-name> :"
+	echo "	Creates a new post with the given file name"
+	echo "	Automatically appends the '.md' file extension"
+	echo "-t <post-title> :"
+	echo "	Sets the post title to the given string"
+	echo "	Defaults to the post file name"
+}
+
+NAME=
+TITLE=
+
+OPTSTRING="hn:t:"
+while getopts $OPTSTRING OPT; do
+	case "$OPT" in
+		h)
+			help && exit 1
+			;;
+		n)
+			[ ! "$OPTARG" = "" ] && NAME="$OPTARG"
+			;;
+		t)
+			[ ! "$OPTARG" = "" ] && TITLE="$OPTARG"
+			;;
+		default)
+			help && exit 1
+			;;
+	esac
+done
+
+[ "$NAME" = "" ] && \
+	echo "Must provide a file name! See -h for usage" && exit 1
+
+[ "$TITLE" = "" ] &&
+	TITLE="$NAME"
+
+FILE="posts/${NAME}.md"
+
+cp skeleton.md "$FILE"
+
+sed -i "s/TITLE/$TITLE/" "$FILE"
+sed -i "s/DATE/$(date +%Y-%m-%d)/" "$FILE"
+
+$EDITOR "$FILE"

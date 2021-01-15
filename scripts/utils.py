@@ -13,6 +13,7 @@ class MarkdownHeader:
 
     def __init__(self, slug: str, title: str, **kwargs):
         self.slug = slug
+        self.id = slug.lower().strip().replace(' ', '-')
         self.title = title
         now = datetime.now()
         date = kwargs.get('date', f'{now.year}-{now.month}-{now.day}')
@@ -36,6 +37,10 @@ def READ(fpath):
 def WRITE(fpath, contents):
     with open(fpath, mode='w') as f:
         f.write(contents)
+
+
+def has_extension(fpath, ext):
+    return fpath.split('.')[-1] == ext
 
 
 def parse_header(fpath, f) -> MarkdownHeader:

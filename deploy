@@ -7,4 +7,3 @@
 sftp lanpi <<EOF
 	put -fR ${OUT}/* websites/lenczewski.ddns.net
 EOF
-

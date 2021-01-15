@@ -14,10 +14,7 @@ mkdir ${TMP} ${OUT}
 mkdir ${TMP}/html ${OUT}/html
 mkdir ${TMP}/posts ${OUT}/posts
 
-python ${SCRIPTS}/build.py \
-	html/ ${LAYOUTS}/_Layout.html \
-	posts/ ${LAYOUTS}/_PostLayout.html \
-	${TMP}/ ${OUT}/
+python ${SCRIPTS}/build.py html/ ${LAYOUTS}/ posts/ ${TMP}/ ${OUT}/
 
 deactivate
 
@@ -30,4 +27,3 @@ cp -r public/* ${OUT}
 
 ## clean unnecessary files
 rm -rf ${OUT}/layouts
-
