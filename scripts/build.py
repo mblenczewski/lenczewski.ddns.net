@@ -46,12 +46,12 @@ WORKERS=8
 WORKER_CHUNKSIZE=1
 
 
-def convert_md(layout_fpath, src_fpath, dst_fpath):
+def convert_md(layout_fpath, src_fpath, index, dst_fpath):
     layout = READ(layout_fpath)
 
     (header, contents) = parse_post(src_fpath)
 
-    dynamic_link = f'/posts.html#{header.id}'
+    dynamic_link = f'/{index}#{header.id}'
     static_link = f'/posts/{header.id}.html'
 
     out = layout.\
@@ -119,7 +119,10 @@ def process_post(packed_args):
     
     post_path = f'posts/{header.id}.html'
 
-    convert_md(post_layout, post_fpath, ABS(tmp_dir, post_path))
+    current_year = datetime.now().year
+    index = 'posts.html' if current_year == header.date.year else f'{header.date.year}.html'
+
+    convert_md(post_layout, post_fpath, index, ABS(tmp_dir, post_path))
     template(layout, {'TITLE': header.title},
             ABS(tmp_dir, post_path),
             ABS(out_dir, post_path))
