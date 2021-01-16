@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LAYOUTS=html/layouts
+LAYOUTS=layouts
 SCRIPTS=scripts
 TMP=tmp
 OUT=out

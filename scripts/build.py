@@ -95,7 +95,7 @@ def template_list(src_fpath, item_src_fpaths, dst_fpath):
 
 def create_post_index(layout_fpath, src_fpath, prev_index, year, next_index, post_fpaths, dst_fpath):
     placeholder_map = {
-            'TITLE': f'Post Index ({year})',
+            'TITLE': f'Posts {year}',
             'POST_INDEX_PREV': prev_index if prev_index else '#',
             'POST_INDEX_NEXT': next_index if next_index else '#',
     }
@@ -147,6 +147,10 @@ if __name__ == '__main__':
             ABS(html_dir, 'index.html'),
             ABS(out_dir, 'index.html'))
 
+    template(page_layout, {'TITLE': 'Projects'},
+            ABS(html_dir, 'projects.html'),
+            ABS(out_dir, 'projects.html'))
+
     with Pool(WORKERS) as pool:
         def get_posts(post_dir):
             for post_name in os.listdir(post_dir):
@@ -179,7 +183,8 @@ if __name__ == '__main__':
                 ABS(out_dir, 'posts.html'))
 
         ## create the remaining post indices and link them together
-        for idx, (year, post_fpaths) in enumerate(indices[1:]):
+        indices = indices[1:]
+        for idx, (year, post_fpaths) in enumerate(indices):
             current_index = f'{year}.html'
 
             ## indices are in reverse chronological order (newest first)
