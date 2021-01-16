@@ -1,107 +1,107 @@
 :root {
-    --theme-light-bg: #eeeeee;
-    --theme-light-fg: grey;
-    --theme-light-text: #111111;
-    --theme-light-link: darkslateblue;
-    --theme-light-h1: #111111;
-    --theme-light-h2: darkgoldenrod;
-    --theme-light-h3: darkcyan;
-    --theme-light-heading: darkgreen;
-    --theme-light-switch-shadow: #373d4e;
-    --theme-light-toggle-text: 'dark';
+  --theme-light-bg: #eeeeee;
+  --theme-light-fg: grey;
+  --theme-light-text: #111111;
+  --theme-light-link: darkslateblue;
+  --theme-light-h1: #111111;
+  --theme-light-h2: darkgoldenrod;
+  --theme-light-h3: darkcyan;
+  --theme-light-heading: darkgreen;
+  --theme-light-switch-shadow: #373d4e;
+  --theme-light-toggle-text: 'dark';
 
-    --theme-dark-bg: #111111;
-    --theme-dark-fg: grey;
-    --theme-dark-text: #eeeeee;
-    --theme-dark-link: slateblue;
-    --theme-dark-h1: #eeeeee;
-    --theme-dark-h2: goldenrod;
-    --theme-dark-h3: cyan;
-    --theme-dark-heading: green;
-    --theme-dark-switch-shadow: #fce477;
-    --theme-dark-toggle-text: 'light';
+  --theme-dark-bg: #111111;
+  --theme-dark-fg: grey;
+  --theme-dark-text: #eeeeee;
+  --theme-dark-link: slateblue;
+  --theme-dark-h1: #eeeeee;
+  --theme-dark-h2: goldenrod;
+  --theme-dark-h3: cyan;
+  --theme-dark-heading: green;
+  --theme-dark-switch-shadow: #fce477;
+  --theme-dark-toggle-text: 'light';
 
-    --theme-bg: var(--theme-dark-bg);
-    --theme-fg: var(--theme-dark-fg);
-    --theme-text: var(--theme-dark-text);
-    --theme-link: var(--theme-dark-link);
-    --theme-h1: var(--theme-dark-h1);
-    --theme-h2: var(--theme-dark-h2);
-    --theme-h3: var(--theme-dark-h3);
-    --theme-heading: var(--theme-dark-heading);
-    --theme-switch-shadow: var(--theme-dark-switch-shadow);
-    --theme-toggle-text: var(--theme-dark-toggle-text)
+  --theme-bg: var(--theme-dark-bg);
+  --theme-fg: var(--theme-dark-fg);
+  --theme-text: var(--theme-dark-text);
+  --theme-link: var(--theme-dark-link);
+  --theme-h1: var(--theme-dark-h1);
+  --theme-h2: var(--theme-dark-h2);
+  --theme-h3: var(--theme-dark-h3);
+  --theme-heading: var(--theme-dark-heading);
+  --theme-switch-shadow: var(--theme-dark-switch-shadow);
+  --theme-toggle-text: var(--theme-dark-toggle-text);
 }
 
 .theme-toggle:checked~#themed {
-    --theme-bg: var(--theme-light-bg);
-    --theme-fg: var(--theme-light-fg);
-    --theme-text: var(--theme-light-text);
-    --theme-link: var(--theme-light-link);
-    --theme-h1: var(--theme-light-h1);
-    --theme-h2: var(--theme-light-h2);
-    --theme-h3: var(--theme-light-h3);
-    --theme-heading: var(--theme-light-heading);
-    --theme-switch-shadow: var(--theme-light-switch-shadow);
-    --theme-toggle-text: var(--theme-light-toggle-text)
+  --theme-bg: var(--theme-light-bg);
+  --theme-fg: var(--theme-light-fg);
+  --theme-text: var(--theme-light-text);
+  --theme-link: var(--theme-light-link);
+  --theme-h1: var(--theme-light-h1);
+  --theme-h2: var(--theme-light-h2);
+  --theme-h3: var(--theme-light-h3);
+  --theme-heading: var(--theme-light-heading);
+  --theme-switch-shadow: var(--theme-light-switch-shadow);
+  --theme-toggle-text: var(--theme-light-toggle-text);
 }
 
 .theme-toggle {
-    clip: rect(1px,1px,1px,1px);
-    display: none;
-    height: 1px;
-    overflow: hidden;
-    position: absolute!important;
-    width: 1px
+  clip: rect(1px,1px,1px,1px);
+  display: none;
+  height: 1px;
+  overflow: hidden;
+  position: absolute!important;
+  width: 1px;
 }
 
 .theme-toggle-label {
-    cursor: pointer;
-    display: flex
+  cursor: pointer;
+  display: flex;
 }
 
 .theme-toggle-label::before {
-    transition: text-shadow .2s
+  transition: text-shadow .2s;
 }
 
 .theme-toggle-label::after {
-    align-self: center;
-    color: var(--theme-switch-shadow);
-    content: var(--theme-toggle-text)
+  align-self: center;
+  color: var(--theme-switch-shadow);
+  content: var(--theme-toggle-text);
 }
 
 .theme-toggle-label:hover::before,.theme-toggle:focus~#themed .theme-toggle-label::before {
-    text-shadow: 0 0 15px var(--theme-switch-shadow)
+  text-shadow: 0 0 15px var(--theme-switch-shadow);
 }
 
 #themed {
-    background: var(--theme-bg);
-    color: var(--theme-text);
-    font: 1em/1.62 monospace,'Lucida Console',Monaco,monospace;
-    min-height: 100%;
-    transition: color .2s,background-color .2s
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  font: 1em/1.62 monospace, 'Lucida Console', Monaco,monospace;
+  min-height: 100%;
+  transition: color .2s, background-color .2s;
 }
 
 nav {
-    background: var(--theme-bg)
+  background: var(--theme-bg);
 }
 
 a {
-    color: var(--theme-link)
+  color: var(--theme-link);
 }
 
 h1 {
-    color: var(--theme-h1)
+  color: var(--theme-h1);
 }
 
 h2 {
-    color: var(--theme-h2)
+  color: var(--theme-h2);
 }
 
 h3 {
-    color: var(--theme-h3)
+  color: var(--theme-h3);
 }
 
 h4,h5,h6 {
-    color: var(--theme-heading)
+  color: var(--theme-heading);
 }
