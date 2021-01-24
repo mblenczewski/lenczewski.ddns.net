@@ -6,7 +6,6 @@
   --theme-light-h1: #111111;
   --theme-light-h2: darkgoldenrod;
   --theme-light-h3: darkcyan;
-  --theme-light-heading: darkgreen;
   --theme-light-switch-shadow: #373d4e;
   --theme-light-toggle-text: 'dark';
 
@@ -17,7 +16,6 @@
   --theme-dark-h1: #eeeeee;
   --theme-dark-h2: goldenrod;
   --theme-dark-h3: cyan;
-  --theme-dark-heading: green;
   --theme-dark-switch-shadow: #fce477;
   --theme-dark-toggle-text: 'light';
 
@@ -28,7 +26,6 @@
   --theme-h1: var(--theme-dark-h1);
   --theme-h2: var(--theme-dark-h2);
   --theme-h3: var(--theme-dark-h3);
-  --theme-heading: var(--theme-dark-heading);
   --theme-switch-shadow: var(--theme-dark-switch-shadow);
   --theme-toggle-text: var(--theme-dark-toggle-text);
 }
@@ -41,7 +38,6 @@
   --theme-h1: var(--theme-light-h1);
   --theme-h2: var(--theme-light-h2);
   --theme-h3: var(--theme-light-h3);
-  --theme-heading: var(--theme-light-heading);
   --theme-switch-shadow: var(--theme-light-switch-shadow);
   --theme-toggle-text: var(--theme-light-toggle-text);
 }
@@ -98,10 +94,6 @@ h2 {
   color: var(--theme-h2);
 }
 
-h3 {
+h3,h4,h5,h6 {
   color: var(--theme-h3);
-}
-
-h4,h5,h6 {
-  color: var(--theme-heading);
 }

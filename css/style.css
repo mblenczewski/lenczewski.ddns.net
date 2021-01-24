@@ -42,13 +42,12 @@ hr {
   display: grid;
   grid-column-gap: 1em;
   grid-template-columns: auto auto;
-  grid-template-rows: 10em;
+  grid-template-rows: auto;
   margin: 1em 0em 1em 0em;
-  max-height: 10em;
 }
 
 .project > img.project-thumbnail {
-  background-color: grey;
+  background-color: var(--theme-fg);
   opacity: 0.5;
   height: 10em;
   width: 10em;

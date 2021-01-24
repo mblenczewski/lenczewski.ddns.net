@@ -38,8 +38,11 @@ PLACEHOLDERS = {
     'POST_CONTENT': 'PLACEHOLDER',
     'POST_DATE': 'PUBLISH_DATE',
     'POST_EDIT_DATE': 'EDIT_DATE',
+    'POST_INDEX_YEAR': 'INDEX_YEAR',
     'POST_INDEX_NEXT': 'NEXT_YEAR',
+    'POST_INDEX_NEXT_LINK': 'NEXT_INDEX_LINK',
     'POST_INDEX_PREV': 'PREV_YEAR',
+    'POST_INDEX_PREV_LINK': 'PREV_INDEX_LINK',
 }
 
 WORKERS=8
@@ -96,8 +99,11 @@ def template_list(src_fpath, item_src_fpaths, dst_fpath):
 def create_post_index(layout_fpath, src_fpath, prev_index, year, next_index, post_fpaths, dst_fpath):
     placeholder_map = {
             'TITLE': f'Posts {year}',
-            'POST_INDEX_PREV': prev_index if prev_index else '#',
+            'POST_INDEX_YEAR': f'{year}',
             'POST_INDEX_NEXT': next_index if next_index else '#',
+            'POST_INDEX_NEXT_LINK': '&lt;&lt;&lt; Newer Posts' if next_index else '',
+            'POST_INDEX_PREV': prev_index if prev_index else '#',
+            'POST_INDEX_PREV_LINK': 'Older Posts &gt;&gt;&gt;' if prev_index else '',
     }
 
     template(layout_fpath, placeholder_map,
@@ -143,19 +149,22 @@ if __name__ == '__main__':
     post_layout = ABS(layout_dir, '_PostLayout.html')
     post_index_layout = ABS(layout_dir, '_PostIndexLayout.html')
 
-    template(page_layout, {'TITLE': 'Index'},
-            ABS(html_dir, 'index.html'),
-            ABS(out_dir, 'index.html'))
-
-    template(page_layout, {'TITLE': 'Projects'},
-            ABS(html_dir, 'projects.html'),
-            ABS(out_dir, 'projects.html'))
+    ## template all html pages
+    for page in os.listdir(html_dir):
+        page_fpath = os.path.join(html_dir, page)
+        if os.path.isfile(page_fpath) and has_extension(page, 'html'):
+            ext_len = len('.html')  ## for stripping the file extension from the title
+            normalised_title = f'{page[0].upper()}{page[1:-ext_len]}'
+            template(page_layout, {'TITLE': normalised_title},
+                    ABS(html_dir, page),
+                    ABS(out_dir, page))
 
     with Pool(WORKERS) as pool:
         def get_posts(post_dir):
-            for post_name in os.listdir(post_dir):
-                if os.path.isfile(os.path.join(post_dir, post_name)) and has_extension(post_name, 'md'):
-                    yield os.path.join(post_dir, post_name), page_layout, post_layout, tmp_dir, out_dir
+            for post in os.listdir(post_dir):
+                post_fpath = os.path.join(post_dir, post)
+                if os.path.isfile(post_fpath) and has_extension(post, 'md'):
+                    yield post_fpath, page_layout, post_layout, tmp_dir, out_dir
 
         ## find all markdown posts and convert them to html
         all_posts = [t for t in pool.imap(process_post, get_posts(post_dir), WORKER_CHUNKSIZE) if t is not None]

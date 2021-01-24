@@ -1,31 +1,76 @@
-<div class="container center-text">
-  <div style="padding-bottom: 5em;">
-    <h1>Hello, World!</h1>
-      <p>Isn't this a pretty cool website? :)</p>
+<div class="container">
+  <div class="center-text">
+    <h2 id="about">About</h2>
+    <p>
+      Hi, i'm Mikołaj. I like programming, physics, swimming, and karate. A 
+      link to my GitHub profile (and a few other platform profiles) can be 
+      found below, alongside some of my current projects.
+    </p>
+  </div>
+  <div class="center-text">
+    <h2 id="find-me">Find Me</h2>
+    <p>
+      Here are a few links to platforms i'm on:
+    </p>
+    <span>
+      <a href="https://github.com/mblenczewski" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://www.twitch.tv/mblenczewski" target="_blank" rel="noopener noreferrer">Twitch</a>
+      <a href="https://www.linkedin.com/in/mblenczewski/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </span>
+  </div>
+  <div class="center-text">
+    <h2 id="security">Security</h2>
+    <p>
+      A copy of my GPG pubkey can be found <a href="/gpgpubkey" target="_blank" rel="nooperner noreferrer">here</a>.
+    </p>
   </div>
   <div>
-    <h2 id="about">About</h2>
-      <p>
-        Hi, i'm Mikołaj. I enjoy programming, physics, swimming, and karate.
-        I am somewhat active on my GitHub profile, a link to which can be found 
-        below. I find lower-level programming — albeit challenging — hugely 
-        satisfying and fun. Especially when it works!
-      </p>
-    </div>
+    <h2 id="projects">My Projects:</h2>
     <div>
-      <h2 id="find-me">Find Me</h2>
-      <p>
-        Here are a few links to platforms i'm on:
-      </p>
-      <span>
-        <a href="https://github.com/mblenczewski" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://www.twitch.tv/mblenczewski" target="_blank" rel="noopener noreferrer">Twitch</a>
-        <a href="https://www.linkedin.com/in/mblenczewski/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </span>
-    <h3 id="security">Security</h3>
-    <p>
-      A copy of my GPG pubkey can be found 
-      <a href="/gpgpubkey" target="_blank" rel="nooperner noreferrer">here</a>.
-    </p>
+      <div class="project">
+        <img class="d-none d-lg-block d-xl-block project-thumbnail" />
+        <div>
+          HyperMan
+          <br />
+          I am current working as part of the University of Manchester Hyperloop 
+          team, working on the software engineering team. I am working on an 
+          embedded control system for the pod written in C++ with a test-driven
+          approach.
+        </div>
+      </div>
+      <hr />
+      <div class="project">
+        <img class="d-none d-lg-block d-xl-block project-thumbnail" />
+        <div>
+          NetSharp - <a href="https://github.com/mblenczewski/NetSharp" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <br />
+          NetSharp is a (relatively) low-level networking library written in C#. 
+          I am writing it using the Event-driven Asynchronous Pattern (EAP) to 
+          get as high a bandwidth as possible.
+        </div>
+      </div>
+      <hr />
+      <div class="project">
+        <img class="d-none d-lg-block d-xl-block project-thumbnail" />
+        <div>
+          clfs-bootstrap - <a href="https://github.com/mblenczewski/clfs-bootstrap" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <br />
+          This is my custom Linux "distribution". I wrote it following the "Cross 
+          Linux From Scratch" guide (found <a href="https://trac.clfs.org">here</a>),
+          but have since refactored the build script and updated the packages used.
+        </div>
+      </div>
+      <hr />
+      <div class="project">
+        <img class="d-none d-lg-block d-xl-block project-thumbnail" />
+        <div>
+          StarSim - <a href="https://github.com/mblenczewski/StarSim" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <br />
+          StarSim was my A-Level computer science coursework, and is a 3D N-Body 
+          simulator using the Barnes-Hutt algorithm. It also features a backing 
+          database so that created systems can be exported, or imported to simulate.
+        </div>
+      </div>
+    </div>
   </div>
 </div>
