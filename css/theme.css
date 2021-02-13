@@ -7,7 +7,7 @@
   --theme-light-h2: darkgoldenrod;
   --theme-light-h3: darkcyan;
   --theme-light-switch-shadow: #373d4e;
-  --theme-light-toggle-text: 'dark';
+  --theme-light-toggle-text: 'light';
 
   --theme-dark-bg: #111111;
   --theme-dark-fg: grey;
@@ -17,7 +17,7 @@
   --theme-dark-h2: goldenrod;
   --theme-dark-h3: cyan;
   --theme-dark-switch-shadow: #fce477;
-  --theme-dark-toggle-text: 'light';
+  --theme-dark-toggle-text: 'dark';
 
   --theme-bg: var(--theme-dark-bg);
   --theme-fg: var(--theme-dark-fg);

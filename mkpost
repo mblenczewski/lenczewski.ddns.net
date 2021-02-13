@@ -39,6 +39,8 @@ done
 [ "$TITLE" = "" ] &&
 	TITLE="$NAME"
 
+[ ! -d posts ] && mkdir posts
+
 FILE="posts/${NAME}.md"
 
 cp skeleton.md "$FILE"
