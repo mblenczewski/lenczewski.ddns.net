@@ -2,5 +2,4 @@
 
 . ./common.sh
 
-rm -rf ${TMP}
-rm -rf ${OUT}
+rm -rf $TMP $OUT

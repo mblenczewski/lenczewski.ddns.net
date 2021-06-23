@@ -5,5 +5,5 @@
 ./compile
 
 sftp lanpi <<EOF
-	put -fR ${OUT}/* websites/lenczewski.ddns.net
+	put -fR $OUT/* www/lenczewski.ddns.net
 EOF

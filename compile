@@ -6,24 +6,23 @@
 ./clean
 
 ## setup build environment
-mkdir ${TMP} ${OUT}
+mkdir $TMP $OUT
 
 ## template files, convert markdown to html, and build post index file
 . env/bin/activate
 
-mkdir ${TMP}/html ${OUT}/html
-mkdir ${TMP}/posts ${OUT}/posts
+mkdir $TMP/html $OUT/html $TMP/posts $OUT/posts
 
-python ${SCRIPTS}/build.py html/ ${LAYOUTS}/ posts/ ${TMP}/ ${OUT}/
+python $SCRIPTS/build.py html/ $LAYOUTS/ posts/ $TMP/ $OUT/
 
 deactivate
 
 ## copy over static files into webroot
-mkdir ${OUT}/lib && cp -r lib/* ${OUT}/lib
-mkdir ${OUT}/css && cp -r css/* ${OUT}/css
-mkdir ${OUT}/js && cp -r js/* ${OUT}/js
+mkdir $OUT/lib && cp -r lib/* $OUT/lib
+mkdir $OUT/css && cp -r css/* $OUT/css
+mkdir $OUT/js && cp -r js/* $OUT/js
 
-cp -r public/* ${OUT}
+cp -r public/* $OUT
 
 ## clean unnecessary files
-rm -rf ${OUT}/layouts
+rm -rf $OUT/layouts
