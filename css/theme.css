@@ -42,15 +42,6 @@
   --theme-toggle-text: var(--theme-light-toggle-text);
 }
 
-.theme-toggle {
-  clip: rect(1px,1px,1px,1px);
-  display: none;
-  height: 1px;
-  overflow: hidden;
-  position: absolute!important;
-  width: 1px;
-}
-
 .theme-toggle-label {
   cursor: pointer;
   display: flex;
@@ -75,7 +66,6 @@
   color: var(--theme-text);
   font: 1em/1.62 monospace, 'Lucida Console', Monaco,monospace;
   min-height: 100%;
-  transition: color .2s, background-color .2s;
 }
 
 nav {

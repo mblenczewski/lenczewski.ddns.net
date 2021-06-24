@@ -24,26 +24,17 @@ hr {
   padding: 1em;
 }
 
-.navbar {
-  overflow: hidden;
-  top: 0;
-  padding: 0;
-  margin: 0;
-  width: 100%;
+.menu-icon {
+  font-size: 2em;
 }
 
-.navbar-padded {
-  padding-left: 1em;
-  padding-right: 1em;
+.input-hidden {
+  display: none;
 }
 
 .spaced-flex {
   display: flex;
   justify-content: space-between;
-}
-
-.footer {
-  vertical-align: middle;
 }
 
 .center-text {
