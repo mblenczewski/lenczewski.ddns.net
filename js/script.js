@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded',function(e){
+document.addEventListener('DOMContentLoaded',function(e) {
 	const themeToggler = document.querySelector('#theme-toggler');
-	const themeCookie = 'switchedThemeFromDefault';
+	const themeCookie = 'toggledTheme';
 
 	if (typeof Storage !== 'undefined') {
 		themeToggler.checked = localStorage.getItem(themeCookie) === 'true';
@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded',function(e){
 		console.log('No storage supported! Theme selection wont be saved!');
 	}
 
-	themeToggler.addEventListener('change',function(e){
+	themeToggler.addEventListener('change',function(e) {
 		if (typeof Storage !== 'undefined') {
 			if (e.currentTarget.checked === true) {
-				localStorage.setItem(themeCookie,'true');
+				localStorage.setItem(themeCookie, 'true');
 			} else {
 				localStorage.removeItem(themeCookie);
 			}

@@ -1,16 +1,31 @@
-.menu-container {
-  overflow: hidden;
-  padding: 0;
-  padding-left: 1em;
-  padding-right: 1em;
+@media (max-width:576px) {
+  .menu-toggle~#menu li {
+    display: none;
+  }
+
+  .menu-toggle~#menu li:first-child {
+    display: inline-block;
+  }
+
+  .menu-toggle:checked~#menu li {
+    display: block;
+  }
 }
 
-#menu {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+@media not (max-width:576px) {
+  .navbar-menu li {
+    display: inline-block;
+  }
+
+  .navbar-menu li:first-child {
+    display: none;
+  }
 }
 
-#menu li {
-  display: inline-block;
+.menu-toggle-label {
+  cursor: pointer;
+}
+
+.menu-toggle-icon {
+  vertical-align: middle;
 }

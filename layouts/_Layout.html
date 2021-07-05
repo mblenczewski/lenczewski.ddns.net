@@ -31,8 +31,14 @@
     <input type="checkbox" class="input-hidden theme-toggle" id="theme-toggler" />
     <div id="themed">
       <header>
-        <nav class="spaced-flex menu-container">
-          <ul id="menu">
+        <nav class="navbar flex-spaced">
+          <input type="checkbox" class="input-hidden menu-toggle" id="menu-toggler" />
+          <ul id="menu" class="navbar-menu">
+            <li>
+              <label class="menu-toggle-label" for="menu-toggler">
+                <img class="menu-toggle-icon" src="/menu.svg" />
+              </label>
+            </li>
             <li><a href="/index.html">Index</a></li>
             <li><a href="/posts.html">Blog</a></li>
             <li><a href="/index.html#projects">Projects</a></li>
@@ -46,7 +52,7 @@
 PLACEHOLDER</main>
       <footer>
         <hr />
-        <div class="center-text"> 
+        <div class="text-center">
           <span>Mikołaj B. Lenczewski</span> | 
           <a
             href="http://ajukvz67jzqs7cwrw4s7fn7pvjcbwrhuh4sfbeq4g6qtdzblljbjc2id.onion/"
