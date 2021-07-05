@@ -12,7 +12,7 @@
   }
 }
 
-@media not (max-width:576px) {
+@media (min-width:577px) {
   .navbar-menu li {
     display: inline-block;
   }
